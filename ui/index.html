@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mining</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="overlay" class="hidden">
+      <div class="panel">
+        <div class="header">
+          <div class="title">Mining Leaderboard</div>
+          <button id="close" class="close-button">Close</button>
+        </div>
+        <div class="table">
+          <div class="row head">
+            <div class="cell rank">#</div>
+            <div class="cell name">Player</div>
+            <div class="cell xp">XP</div>
+            <div class="cell level">Level</div>
+            <div class="cell ores">Total Ores</div>
+          </div>
+          <div id="rows" class="body"></div>
+          <div id="empty" class="empty hidden">No data yet.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom-right mission progress: image + counter XXXX/XXXX in slot (visible when task active) -->
+    <div id="task-progress-widget" class="task-progress-widget hidden">
+      <img id="task-widget-bg" class="task-widget-bg" src="images/counter.png" alt="" />
+      <div id="task-widget-plaque" class="task-widget-plaque">
+        <div id="task-widget-lines" class="task-widget-counter"></div>
+      </div>
+    </div>
+    <div id="task-overlay" class="task-overlay hidden">
+      <div class="task-panel">
+        <div class="task-header">
+          <span class="task-title">Mining Tasks</span>
+          <button id="task-close" class="task-close" type="button" aria-label="Close">&times;</button>
+        </div>
+        <div id="task-current" class="task-current hidden">
+          <div class="task-current-label">Current task</div>
+          <div id="task-current-name" class="task-current-name"></div>
+          <div id="task-progress" class="task-progress"></div>
+          <div class="task-actions">
+            <button id="task-handin" class="task-btn task-btn-primary" type="button">Hand In</button>
+            <button id="task-cancel" class="task-btn task-btn-ghost" type="button">Cancel</button>
+          </div>
+        </div>
+        <div id="task-list-wrap" class="task-list-wrap">
+          <div class="task-list-label">Accept a task</div>
+          <div id="task-list" class="task-list"></div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
