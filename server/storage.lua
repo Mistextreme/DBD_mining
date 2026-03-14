@@ -2,7 +2,8 @@
 
 PlayerStorage = {}
 
-local cache = {}   -- [identifier] = data table (live copy)
+local cache     = {}   -- [identifier] = data table (live copy)
+local sourceMap = {}   -- [src]        = identifier  (for reliable playerDropped lookup)
 
 -- ─── Internal DB ops ─────────────────────────────────────────────────────────
 
@@ -90,7 +91,7 @@ function PlayerStorage.CreateOrLoad(identifier, name, cb)
     end)
 end
 
--- ─── Auto-save loop (every 5 minutes) ───────────────────────────────────────
+-- ─── Auto-save loop (every 5 minutes) ────────────────────────────────────────
 
 Citizen.CreateThread(function()
     while true do
@@ -104,7 +105,7 @@ Citizen.CreateThread(function()
     end
 end)
 
--- ─── Player connect / disconnect ─────────────────────────────────────────────
+-- ─── Player connect / disconnect ──────────────────────────────────────────────
 
 RegisterNetEvent('dbd_mining:server:requestPlayerData', function()
     local src        = source
@@ -118,6 +119,11 @@ RegisterNetEvent('dbd_mining:server:requestPlayerData', function()
         return
     end
 
+    -- Cache src → identifier now, while the framework player is guaranteed to exist.
+    -- This is consumed by playerDropped, which fires after some frameworks already
+    -- remove the player from their registry.
+    sourceMap[src] = identifier
+
     local cached = PlayerStorage.GetCached(identifier)
     if cached then
         TriggerClientEvent('dbd_mining:client:receivePlayerData', src, cached)
@@ -130,7 +136,13 @@ RegisterNetEvent('dbd_mining:server:requestPlayerData', function()
 end)
 
 AddEventHandler('playerDropped', function()
-    local identifier = Framework.GetIdentifier(source)
+    local src        = source
+    -- Use the internal sourceMap instead of Framework.GetIdentifier() because
+    -- several frameworks (QBX, ox_core) have already removed the player from
+    -- their registry by the time playerDropped fires.
+    local identifier = sourceMap[src]
+    sourceMap[src]   = nil
+
     if identifier then
         PlayerStorage.FlushCache(identifier)
     end
