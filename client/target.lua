@@ -66,11 +66,14 @@ function RegisterOreTarget(entity, zoneId, oreIdx)
 end
 
 --- Remove mining interaction from an ore entity (called before despawn).
+--- For ox_target we pass nil to remove ALL options — the entity is being deleted immediately
+--- after this call so removing everything is correct and avoids the string-vs-table API mismatch.
 function RemoveOreTarget(entity, zoneId, oreIdx)
     local name = ('dbd_ore_%d_%d'):format(zoneId, oreIdx)
 
     if targetType == 'ox_target' then
-        exports.ox_target:removeLocalEntity(entity, name)
+        -- nil second arg removes all options attached to this entity
+        exports.ox_target:removeLocalEntity(entity)
 
     elseif targetType == 'qb-target' then
         exports['qb-target']:RemoveZone(name)
