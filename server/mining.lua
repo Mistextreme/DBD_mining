@@ -77,8 +77,10 @@ RegisterNetEvent('dbd_mining:server:mine', function(zoneId, oreIdx, toolItem)
         return
     end
 
-    -- Give reward items
-    local givenItems = {}
+    -- Give reward items and tally the actual ore count
+    local givenItems  = {}
+    local totalOreSum = 0
+
     for _, reward in ipairs(zone.reward) do
         local base   = math.random(reward.min, reward.max)
         local bonus  = math.random(toolEntry.bonus.min, toolEntry.bonus.max)
@@ -86,12 +88,15 @@ RegisterNetEvent('dbd_mining:server:mine', function(zoneId, oreIdx, toolItem)
         if amount > 0 then
             Inventory.Give(src, reward.item, amount)
             givenItems[#givenItems + 1] = { item = reward.item, amount = amount }
+            totalOreSum = totalOreSum + amount
         end
     end
 
-    -- Update player stats
+    -- Update player stats:
+    --   mined      = number of rock nodes mined (always +1 per action)
+    --   total_ores = cumulative sum of all individual ores received
     data.mined      = (data.mined      or 0) + 1
-    data.total_ores = (data.total_ores or 0) + 1
+    data.total_ores = (data.total_ores or 0) + totalOreSum
     PlayerStorage.SetCached(identifier, data)
 
     -- XP
@@ -101,7 +106,7 @@ RegisterNetEvent('dbd_mining:server:mine', function(zoneId, oreIdx, toolItem)
     -- Cooldown
     setNodeCooldown(zoneId, oreIdx)
 
-    -- Respond
+    -- Respond to client
     TriggerClientEvent('dbd_mining:client:mineResult', src, true, { items = givenItems })
 
     -- Update task widget if applicable
@@ -110,7 +115,7 @@ RegisterNetEvent('dbd_mining:server:mine', function(zoneId, oreIdx, toolItem)
     end
 
     if Config.Core.Debug then
-        print(('[DBD Mining] %s (src:%d) mined zone %d ore %d  |  +%dxp  |  items: %d'):format(
-            Framework.GetName(src), src, zoneId, oreIdx, xpAmount, #givenItems))
+        print(('[DBD Mining] %s (src:%d) mined zone %d ore %d  |  +%dxp  |  ores given: %d'):format(
+            Framework.GetName(src), src, zoneId, oreIdx, xpAmount, totalOreSum))
     end
 end)
