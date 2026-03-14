@@ -1,7 +1,7 @@
 -- Core mining: zone proximity, ore prop lifecycle, and mining sequence
 
 -- [zoneId][oreIdx] = { entity=number, depleted=bool, respawnAt=number(ms) }
-local spawnedOres = {}
+local spawnedOres    = {}
 local activeZoneId   = nil
 local lastGlobalMine = 0
 
@@ -73,13 +73,12 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(2500)
 
-        local pedCoords = GetEntityCoords(PlayerPedId())
-        local nearest   = nil
+        local pedCoords   = GetEntityCoords(PlayerPedId())
+        local nearest     = nil
         local nearestDist = 120.0
 
         for zoneId, meta in pairs(Config.Mining.Meta) do
             if type(zoneId) == 'number' and meta.Center then
-                -- Hours check
                 local inTime = true
                 local hours  = meta.Hours
                 if hours and hours.Enabled then
@@ -147,9 +146,27 @@ local function markOreDepleted(zoneId, oreIdx)
     spawnedOres[zoneId][oreIdx] = record
 end
 
--- ─── Mining start (fired locally by target callbacks) ────────────────────────
+-- ─── Mining start ─────────────────────────────────────────────────────────────
+-- ox_target fires TriggerEvent(event, zoneId, oreIdx, entity) — three separate args.
+-- qb-target and qtarget fire TriggerEvent(event, optionTable) — one table arg.
+-- The handler detects which format was used and unpacks accordingly.
 
-AddEventHandler('dbd_mining:client:startMining', function(zoneId, oreIdx, entity)
+AddEventHandler('dbd_mining:client:startMining', function(zoneIdOrData, oreIdxArg, entityArg)
+    local zoneId, oreIdx, entity
+
+    if type(zoneIdOrData) == 'table' then
+        -- qb-target / qtarget: entire options table passed as first argument
+        zoneId = zoneIdOrData.zoneId
+        oreIdx = zoneIdOrData.oreIdx
+        entity = zoneIdOrData.entity
+    else
+        -- ox_target: three separate arguments
+        zoneId = zoneIdOrData
+        oreIdx = oreIdxArg
+        entity = entityArg
+    end
+
+    if not zoneId or not oreIdx then return end
     if Mining.IsMining then return end
 
     -- Global cooldown
