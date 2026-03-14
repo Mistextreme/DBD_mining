@@ -1,0 +1,14 @@
+TASK COUNTER IMAGE - SETUP
+==========================
+
+The progress widget uses the image as background (bottom-right). The counter text "XXXX/XXXX" is shown in the slot area.
+
+1. Image file:  ui/images/counter.png
+   (same folder as this file)
+
+2. The image is already listed in fxmanifest.lua under files { }.
+
+3. Recommended resolution: 512 x 512 px (or 256 x 256 px).
+   Format: PNG (with or without transparency).
+
+The widget is fixed bottom-right. Only the counter value (e.g. 800/1500) appears in the slot; no ore name.
