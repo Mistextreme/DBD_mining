@@ -1,80 +1,81 @@
 {
     "notify": {
-        "missing-item": "Chybí mi něco, abych to mohl udělat",
-        "not-experienced": "Nemyslím si, že mám dostatek zkušeností na to, abych to udělal",
-        "missing-pickaxe": "Potřebuji krumpáč, který mohu skutečně použít",
-        "pickaxe-no-durability": "Můj krumpáč je ve strašném stavu..",
-        "nighttime": "Nemyslím si, že mám povolení těžit v noci",
-        "no-money": "Nemáš dostatek peněz",
-        "no-item": "Nemáš dostatek tohoto předmětu",
-        "cant-carry": "Nemůžeš unést tolik věcí",
-        "max-ingots": "Můžeš tavit maximálně %s ingotů najednou"
+        "missing-item": "I'm missing something to do that",
+        "not-experienced": "I don't think I have enough experience to do that",
+        "missing-pickaxe": "I need a pickaxe that I can actually use",
+        "pickaxe-no-durability": "My pickaxe is in terrible condition..",
+        "nighttime": "I don't think I'm allowed to mine at night",
+        "no-money": "You don't have enough money",
+        "no-item": "You don't have enough of this item",
+        "cant-carry": "You can't carry that many items",
+        "max-ingots": "You can smelt a maximum of %s ingots at once"
     },
     "target": {
-        "mine-ore": "Těžit",
-        "mine-shop": "Mluvit",
-        "smelt-ore": "Tavit"
+        "mine-ore": "Mine",
+        "mine-shop": "Talk",
+        "smelt-ore": "Smelt",
+        "mining-tasks": "Mining Tasks"
     },
     "textui": {
-        "smelt": "Tavení (%s/%s) - %s%%"
+        "smelt": "Smelting (%s/%s) - %s%%"
     },
     "inputs": {
-        "label": "Množství",
-        "desc": "Kolik?"
+        "label": "Amount",
+        "desc": "How much?"
     },
     "player-data": {
-        "level-title": "Těžba | Úroveň %s/%s",
-        "level-desc": "Aktuálně máš %sXP",
-        "stats-title": "Životní statistiky",
-        "stats-desc": "Zobraz si své celoživotní statistiky těžby",
-        "meta-next-level": "Další úroveň",
-        "meta-remainder": "Zbývá",
-        "meta-maxed-level": "Dosažena maximální úroveň"
+        "level-title": "Mining | Level %s/%s",
+        "level-desc": "You currently have %sXP",
+        "stats-title": "Lifetime Stats",
+        "stats-desc": "View your lifetime mining statistics",
+        "meta-next-level": "Next Level",
+        "meta-remainder": "Remaining",
+        "meta-maxed-level": "Maximum Level Reached"
     },
     "stats-menu": {
-        "main-title": "Životní statistiky",
-        "mined-title": "Vytěženo",
-        "mined-desc": "Celkem jsi vytěžil %s rud",
-        "smelted-title": "Taveno",
-        "smelted-desc": "Celkem jsi vytavil %s ingotů",
-        "earned-title": "Vyděláno",
-        "earned-desc": "Celkem jsi vydělal $%s"
+        "main-title": "Lifetime Stats",
+        "mined-title": "Mined",
+        "mined-desc": "You have mined a total of %s ores",
+        "smelted-title": "Smelted",
+        "smelted-desc": "You have smelted a total of %s ingots",
+        "earned-title": "Earned",
+        "earned-desc": "You have earned a total of $%s"
     },
     "mine-menu": {
-        "main-title": "Doly",
-        "leaderboards-title": "Žebříčky",
-        "leaderboards-desc": "Zobraz top 10 těžařů",
-        "shop-title": "Obchod",
-        "shop-desc": "Kup si zde své těžební vybavení",
-        "pawn-title": "Zastavárna",
-        "pawn-desc": "Prodej své rudy a další věci se ziskem"
+        "main-title": "Mines",
+        "leaderboards-title": "Leaderboards",
+        "leaderboards-desc": "View the top 10 miners",
+        "shop-title": "Shop",
+        "shop-desc": "Buy your mining equipment here",
+        "pawn-title": "Pawn Shop",
+        "pawn-desc": "Sell your ores and other items for a profit"
     },
     "shop-menu": {
-        "main-title": "Doly: Obchod",
-        "pickaxe-title": "%s | Úroveň %s",
-        "item-desc": "Kup %s za $%s"
+        "main-title": "Mines: Shop",
+        "pickaxe-title": "%s | Level %s",
+        "item-desc": "Buy %s for $%s"
     },
     "pawn-menu": {
-        "main-title": "Doly: Zastavárna",
-        "item-title": "Prodej %s",
-        "item-desc": "Prodej %s za $%s"
+        "main-title": "Mines: Pawn Shop",
+        "item-title": "Sell %s",
+        "item-desc": "Sell %s for $%s"
     },
     "leaderboard-menu": {
-        "main-title": "Doly: Žebříčky",
-        "player-desc": "Úroveň: %s | XP: %s | Celkem vytěženo: %s"
+        "main-title": "Mines: Leaderboards",
+        "player-desc": "Level: %s | XP: %s | Total Mined: %s"
     },
     "smelt-menu": {
-        "main-title": "Tavení",
-        "ingot-desc": "Vyžaduje %s"
+        "main-title": "Smelting",
+        "ingot-desc": "Requires %s"
     },
     "logs": {
-        "mined-title": "Vytěžená ruda",
-        "mined-message": "%s (identifikátor: %s) vytěžil skálu za %s",
-        "smelted-title": "Vytavený ingot",
-        "smelted-message": "%s (identifikátor: %s) vytavil x%d %s",
-        "purchased-title": "Nákup v obchodě",
-        "purchased-message": "%s (identifikátor: %s) zakoupil x%d %s",
-        "pawned-title": "Prodej v zastavárně",
-        "pawned-message": "%s (identifikátor: %s) prodal x%d %s"
+        "mined-title": "Ore Mined",
+        "mined-message": "%s (identifier: %s) mined a rock for %s",
+        "smelted-title": "Ingot Smelted",
+        "smelted-message": "%s (identifier: %s) smelted x%d %s",
+        "purchased-title": "Shop Purchase",
+        "purchased-message": "%s (identifier: %s) purchased x%d %s",
+        "pawned-title": "Pawn Shop Sale",
+        "pawned-message": "%s (identifier: %s) sold x%d %s"
     }
 }
